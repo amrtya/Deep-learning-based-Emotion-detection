@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <title>Main page</title>
+</head>
+<body style="background-color: rgb(148, 181, 224);">
+    <section class="container-fluid">
+        <h2>Welcome to Emotion based Music Player</h2>
+        <section class="row justify-content-center">
+            <section class="col-12 col-sm-3 sol-md-3">
+                <form class="form-container" action="{% url 'detect_image' %}" method="POST" autocomplete="off" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Name</label>
+                      <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Enter name" autocomplete="false">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleFormControlFile1">Select Facial Image</label>
+                        <input type="file" class="form-control-file" id="exampleFormControlFile1" name="img" />
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                </form>
+            </section>
+        </section>
+    </section>
+</body>
+</html>
