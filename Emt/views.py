@@ -10,6 +10,7 @@ import numpy as np
 import cv2
 
 # Create your views here.
+res = []
 
 
 def handle_upload_file(f):
@@ -47,6 +48,7 @@ def handle_upload_file(f):
                     1, cv2.LINE_AA)
         # print("Emotion: " + labels[int(np.argmax(yhat))])
 
+        # os.remove("media/"+f.name)
         return labels[int(np.argmax(yhat))]
 
 
@@ -56,6 +58,14 @@ def detect_image(request):
         fs = FileSystemStorage()
         fs.save(upload.name, upload)
         e = handle_upload_file(upload)
+
+        res.append(e)
         return render(request, 'predict.html', {'pred':e})
     else:
         return render(request, 'home.html')
+
+
+def mplayer(request):
+    k = res[0]
+    res.clear()
+    return render(request, 'mplayer.html', {'pred':k})
